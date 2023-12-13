@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      ChessQL
+      <h1>ChessQL</h1>
     </div>
   );
 }
