@@ -9,7 +9,10 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const user = usePage().props.auth.user;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
-        name: user.name,
+        username: user.username,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        phone: user.phone,
         email: user.email,
     });
 
@@ -39,7 +42,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         name="first_name"
                         value={data.first_name}
                         className="mt-1 block w-full"
-                        autoComplete="first_name"
+                        autoComplete="given-name"
                         isFocused={true}
                         onChange={(e) => setData('first_name', e.target.value)}
                         required
@@ -56,7 +59,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         name="last_name"
                         value={data.last_name}
                         className="mt-1 block w-full"
-                        autoComplete="last_name"
+                        autoComplete="family-name"
                         isFocused={true}
                         onChange={(e) => setData('last_name', e.target.value)}
                         required
@@ -82,16 +85,16 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     <InputError message={errors.username} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
+                <div>
                     <InputLabel htmlFor="phone" value="Phone Number" />
 
                     <TextInput
                         id="phone"
-                        type="phone"
                         name="phone"
                         value={data.phone}
                         className="mt-1 block w-full"
                         autoComplete="tel"
+                        isFocused={true}
                         onChange={(e) => setData('phone', e.target.value)}
                         required
                     />
