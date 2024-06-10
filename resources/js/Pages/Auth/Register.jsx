@@ -31,21 +31,73 @@ export default function Register() {
             <Head title="Register" />
 
             <form onSubmit={submit}>
+
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="first_name" value="First Name" />
 
                     <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
+                        id="first_name"
+                        name="first_name"
+                        value={data.first_name}
                         className="mt-1 block w-full"
-                        autoComplete="name"
+                        autoComplete="first_name"
                         isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
+                        onChange={(e) => setData('first_name', e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
+                    <InputError message={errors.first_name} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="last_name" value="Last Name" />
+
+                    <TextInput
+                        id="last_name"
+                        name="last_name"
+                        value={data.last_name}
+                        className="mt-1 block w-full"
+                        autoComplete="last_name"
+                        isFocused={true}
+                        onChange={(e) => setData('last_name', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.last_name} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="username" value="Username" />
+
+                    <TextInput
+                        id="username"
+                        name="username"
+                        value={data.username}
+                        className="mt-1 block w-full"
+                        autoComplete="username"
+                        isFocused={true}
+                        onChange={(e) => setData('username', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.username} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="phone" value="Phone Number" />
+
+                    <TextInput
+                        id="phone"
+                        type="phone"
+                        name="phone"
+                        value={data.phone}
+                        className="mt-1 block w-full"
+                        autoComplete="tel"
+                        onChange={(e) => setData('phone', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.phone} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
@@ -57,7 +109,7 @@ export default function Register() {
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
-                        autoComplete="username"
+                        autoComplete="email"
                         onChange={(e) => setData('email', e.target.value)}
                         required
                     />
