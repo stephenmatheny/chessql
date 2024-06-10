@@ -4,12 +4,24 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    /**
+     * The clubs that belong to the user.
+     */
+    public function clubs(): BelongsToMany
+    {
+        return $this->belongsToMany(Club::class)
+            ->using(ClubUser::class)
+            ->withPivot('role')
+            ->withTimestamps();
+    }
 
     /**
      * The attributes that are mass assignable.
