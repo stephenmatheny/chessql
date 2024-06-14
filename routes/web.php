@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/clubs', [ClubController::class, 'index'])->name('clubs.index');
     Route::get('/clubs/{id}', [ClubController::class, 'show'])->name('clubs.show');
+
+    Route::get('/user/{id}', [ClubController::class, 'show'])->name('user.show');
 });
 
 require __DIR__.'/auth.php';

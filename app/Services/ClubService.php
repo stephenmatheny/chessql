@@ -13,7 +13,7 @@ class ClubService
     public function getUserClubs($paginate = 3)
     {
         $user = Auth::user();
-        return $user->clubs()->paginate($paginate);
+        return $user->clubs()->with('users')->paginate($paginate);
     }
 
     public function getClubUsers(Club $club, $paginate = 9)
