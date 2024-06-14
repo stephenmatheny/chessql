@@ -1,6 +1,8 @@
+import { Link } from "@inertiajs/react";
+
 export default function PaginationLink({ href, className = '', disabled, active, children, ...props }) {
     return (
-        <a
+        <Link
             {...props}
             href={disabled ? null : href}
             className={
@@ -11,6 +13,6 @@ export default function PaginationLink({ href, className = '', disabled, active,
             disabled={disabled}
         >
             {children}
-        </a>
+        </Link>
     );
 }
