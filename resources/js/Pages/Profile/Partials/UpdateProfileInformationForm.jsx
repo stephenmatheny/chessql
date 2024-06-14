@@ -25,9 +25,9 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-sky-900 dark:text-sky-100">Profile Information</h2>
+                <h2 className="text-lg font-medium text-cyan-900 dark:text-cyan-100">Profile Information</h2>
 
-                <p className="mt-1 text-sm text-sky-600 dark:text-sky-400">
+                <p className="mt-1 text-sm text-cyan-600 dark:text-cyan-400">
                     Update your account's profile information and email address.
                 </p>
             </header>
@@ -120,13 +120,13 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                 {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
-                        <p className="text-sm mt-2 text-sky-800 dark:text-sky-200">
+                        <p className="text-sm mt-2 text-cyan-800 dark:text-logoColor">
                             Your email address is unverified.
                             <Link
                                 href={route('verification.send')}
                                 method="post"
                                 as="button"
-                                className="underline text-sm text-sky-600 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-sky-800"
+                                className="underline text-sm text-cyan-600 dark:text-cyan-400 hover:text-cyan-900 dark:hover:text-cyan-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-cyan-800"
                             >
                                 Click here to re-send the verification email.
                             </Link>
@@ -150,7 +150,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-sky-600 dark:text-sky-400">Saved.</p>
+                        <p className="text-sm text-cyan-600 dark:text-cyan-400">Saved.</p>
                     </Transition>
                 </div>
             </form>

@@ -9,20 +9,24 @@ export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen bg-sky-100 dark:bg-sky-900">
-            <nav className="bg-white dark:bg-sky-800 border-b border-sky-100 dark:border-sky-700">
+        <div className="min-h-screen bg-cyan-100 dark:bg-cyan-900">
+            <nav className="bg-white dark:bg-cyan-800 border-b border-cyan-100 dark:border-cyan-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-sky-800 dark:text-sky-200" />
+                                    <ApplicationLogo className="block h-9 w-auto fill-current text-cyan-800 dark:text-logoColor" />
                                 </Link>
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
+                                </NavLink>
+
+                                <NavLink href={route('clubs.index')} active={route().current('clubs.index')}>
+                                    Clubs
                                 </NavLink>
                             </div>
                         </div>
@@ -34,7 +38,7 @@ export default function Authenticated({ user, header, children }) {
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-sky-500 dark:text-sky-400 bg-white dark:bg-sky-800 hover:text-sky-700 dark:hover:text-sky-300 focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-cyan-500 dark:text-cyan-400 bg-white dark:bg-cyan-800 hover:text-cyan-700 dark:hover:text-cyan-300 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {user.first_name} {user.last_name}
 
@@ -67,7 +71,7 @@ export default function Authenticated({ user, header, children }) {
                         <div className="-me-2 flex items-center sm:hidden">
                             <button
                                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
-                                className="inline-flex items-center justify-center p-2 rounded-md text-sky-400 dark:text-sky-500 hover:text-sky-500 dark:hover:text-sky-400 hover:bg-sky-100 dark:hover:bg-sky-900 focus:outline-none focus:bg-sky-100 dark:focus:bg-sky-900 focus:text-sky-500 dark:focus:text-sky-400 transition duration-150 ease-in-out"
+                                className="inline-flex items-center justify-center p-2 rounded-md text-cyan-400 dark:text-cyan-500 hover:text-cyan-500 dark:hover:text-cyan-400 hover:bg-cyan-100 dark:hover:bg-cyan-900 focus:outline-none focus:bg-cyan-100 dark:focus:bg-cyan-900 focus:text-cyan-500 dark:focus:text-cyan-400 transition duration-150 ease-in-out"
                             >
                                 <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path
@@ -95,12 +99,17 @@ export default function Authenticated({ user, header, children }) {
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
                         </ResponsiveNavLink>
+
+
+                        <ResponsiveNavLink href={route('clubs.index')} active={route().current('clubs.index')}>
+                            Clubs
+                        </ResponsiveNavLink>
                     </div>
 
-                    <div className="pt-4 pb-1 border-t border-sky-200 dark:border-sky-600">
+                    <div className="pt-4 pb-1 border-t border-logoColor dark:border-cyan-600">
                         <div className="px-4">
-                            <div className="font-medium text-base text-sky-800 dark:text-sky-200">{user.name}</div>
-                            <div className="font-medium text-sm text-sky-500">{user.email}</div>
+                            <div className="font-medium text-base text-cyan-800 dark:text-logoColor">{user.name}</div>
+                            <div className="font-medium text-sm text-cyan-500">{user.email}</div>
                         </div>
 
                         <div className="mt-3 space-y-1">
@@ -114,7 +123,7 @@ export default function Authenticated({ user, header, children }) {
             </nav>
 
             {header && (
-                <header className="bg-white dark:bg-sky-800 shadow">
+                <header className="bg-white dark:bg-cyan-800 shadow">
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
                 </header>
             )}
