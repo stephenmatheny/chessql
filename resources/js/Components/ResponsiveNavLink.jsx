@@ -7,7 +7,7 @@ export default function ResponsiveNavLink({ active = false, className = '', chil
             className={`w-full flex items-start ps-3 pe-4 py-2 border-l-4 ${
                 active
                     ? 'border-indigo-400 dark:border-indigo-600 text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-900/50 focus:text-indigo-800 dark:focus:text-indigo-200 focus:bg-indigo-100 dark:focus:bg-indigo-900 focus:border-indigo-700 dark:focus:border-indigo-300'
-                    : 'border-transparent text-sky-600 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-200 hover:bg-sky-50 dark:hover:bg-sky-700 hover:border-sky-300 dark:hover:border-sky-600 focus:text-sky-800 dark:focus:text-sky-200 focus:bg-sky-50 dark:focus:bg-sky-700 focus:border-sky-300 dark:focus:border-sky-600'
+                    : 'border-transparent text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-logoColor hover:bg-cyan-50 dark:hover:bg-cyan-700 hover:border-cyan-300 dark:hover:border-cyan-600 focus:text-cyan-800 dark:focus:text-logoColor focus:bg-cyan-50 dark:focus:bg-cyan-700 focus:border-cyan-300 dark:focus:border-cyan-600'
             } text-base font-medium focus:outline-none transition duration-150 ease-in-out ${className}`}
         >
             {children}

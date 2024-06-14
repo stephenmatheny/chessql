@@ -23,6 +23,14 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function isClubAdmin($clubId): bool
+    {
+        return $this->clubs()
+            ->where('club_id', $clubId)
+            ->wherePivot('role', 'admin')
+            ->exists();
+    }
+
     /**
      * The attributes that are mass assignable.
      *

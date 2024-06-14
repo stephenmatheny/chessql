@@ -34,7 +34,7 @@ export default function Register() {
 
             <form onSubmit={submit}>
 
-                <div>
+                <div className="mt-4">
                     <InputLabel htmlFor="first_name" value="First Name" />
 
                     <TextInput
@@ -51,7 +51,7 @@ export default function Register() {
                     <InputError message={errors.first_name} className="mt-2" />
                 </div>
 
-                <div>
+                <div className="mt-4">
                     <InputLabel htmlFor="last_name" value="Last Name" />
 
                     <TextInput
@@ -68,7 +68,7 @@ export default function Register() {
                     <InputError message={errors.last_name} className="mt-2" />
                 </div>
 
-                <div>
+                <div className="mt-4">
                     <InputLabel htmlFor="username" value="Username" />
 
                     <TextInput
@@ -90,16 +90,16 @@ export default function Register() {
 
                     <TextInput
                         id="phone"
-                        type="phone"
                         name="phone"
                         value={data.phone}
                         className="mt-1 block w-full"
                         autoComplete="tel"
+                        isFocused={true}
                         onChange={(e) => setData('phone', e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.phone} className="mt-2" />
+                    <InputError message={errors.username} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
@@ -156,7 +156,7 @@ export default function Register() {
                 <div className="flex items-center justify-end mt-4">
                     <Link
                         href={route('login')}
-                        className="underline text-sm text-sky-600 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-sky-800"
+                        className="underline text-sm text-cyan-600 dark:text-cyan-400 hover:text-cyan-900 dark:hover:text-cyan-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-cyan-800"
                     >
                         Already registered?
                     </Link>
