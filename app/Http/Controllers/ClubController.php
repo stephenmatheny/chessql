@@ -18,7 +18,7 @@ class ClubController extends Controller
 
     public function index()
     {
-        $clubs = $this->clubService->getUserClubs();
+        $clubs = $this->clubService->getUserClubs(6);
         return Inertia::render('Clubs/Index', [
             'clubs' => $clubs,
         ]);
@@ -26,14 +26,15 @@ class ClubController extends Controller
 
     public function create()
     {
-        return Inertia::render('Club/Create');
+        return Inertia::render('Clubs/Create');
     }
 
-    public function show(Club $club)
+    public function show($id)
     {
+        $club = Club::findOrFail($id);
         $users = $this->clubService->getClubUsers($club);
 
-        return Inertia::render('Club/Show', [
+        return Inertia::render('Clubs/Show', [
             'club' => $club,
             'users' => $users,
         ]);
