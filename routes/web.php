@@ -24,10 +24,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/clubs', [ClubController::class, 'index'])->name('clubs.index');
-    Route::get('/clubs/{id}', [ClubController::class, 'show'])->name('clubs.show');
+    Route::get('/club', [ClubController::class, 'index'])->name('club.index');
+    Route::get('/club/{id}', [ClubController::class, 'show'])->name('club.show');
 
-    Route::get('/user/{id}', [ClubController::class, 'show'])->name('user.show');
+    Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
 });
 
 require __DIR__.'/auth.php';

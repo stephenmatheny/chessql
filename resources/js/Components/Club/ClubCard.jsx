@@ -6,7 +6,7 @@ export default function ClubCard({ club }) {
         <div className="max-w-full sm:max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4 block">
             <div className="mx-4 bg-white dark:bg-cyan-800 overflow-hidden shadow-sm rounded-lg">
                 <div className="flex flex-col p-4 sm:p-6 text-cyan-900 dark:text-cyan-100">
-                    <Link className=" hover:duration-300 hover:text-cyan-600" href={route('clubs.show', { id: club.id })}>
+                    <Link className=" hover:duration-300 hover:text-cyan-600" href={route('club.show', { id: club.id })}>
                         {club.name}
                     </Link>
                     <Link className="mt-auto text-sm text-cyan-400 hover:duration-300 hover:text-cyan-600" href="#">

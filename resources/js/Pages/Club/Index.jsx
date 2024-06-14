@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import ClubList from '@/Components/Clubs/ClubList';
+import ClubList from '@/Components/Club/ClubList';
 import { Head } from '@inertiajs/react';
 
 export default function Index({ auth, clubs }) {

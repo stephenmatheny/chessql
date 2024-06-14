@@ -1,4 +1,4 @@
-import ClubPage from "@/Components/Clubs/ClubPage";
+import ClubPage from "@/Components/Club/ClubPage";
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 

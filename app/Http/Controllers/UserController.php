@@ -7,14 +7,14 @@ use App\Http\Requests\Club\DeleteClubRequest;
 use App\Http\Requests\Club\EditClubRequest;
 use App\Models\Club;
 use App\Models\User;
-use App\Services\ClubService;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class ClubController extends Controller
+class UserController extends Controller
 {
 
-    public function __construct(private ClubService $clubService) {}
+    public function __construct(private UserService $clubService) {}
 
     public function index()
     {
