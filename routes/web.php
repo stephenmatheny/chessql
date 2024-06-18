@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/club', [ClubController::class, 'index'])->name('club.index');
     Route::get('/club/{id}', [ClubController::class, 'show'])->name('club.show');
+    Route::get('/club/{id}/edit', [ClubController::class, 'edit'])->name('club.edit');
+    Route::patch('/club/{id}/edit', [ClubController::class, 'update'])->name('club.update');
 
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
 });

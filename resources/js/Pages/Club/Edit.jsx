@@ -8,7 +8,7 @@ export default function Edit({ auth, club, users }) {
             user={auth.user}
             header={<h2 className="font-semibold text-xl text-cyan-800 dark:text-logoColor leading-tight">Edit: {club.name}</h2>}
         >
-            <Head title={"Edit -" . club.name} />
+            <Head title={`Edit - ${club.name}`} />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">

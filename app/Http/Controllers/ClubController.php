@@ -49,8 +49,9 @@ class ClubController extends Controller
         ]);
     }
 
-    public function edit(Club $club)
+    public function edit($clubId)
     {
+        $club = Club::where('id', $clubId)->firstOrFail();
         $this->clubService->authorizeEdit($club);
         $users = $this->clubService->getClubUsers($club, 10);
 
