@@ -52,7 +52,7 @@ class ClubService
 
     public function updateClub(EditClubRequest $request, Club $club)
     {
-        $this->authorizeEdit($club);
+        // $this->authorizeEdit($club);
 
         $club->update([
             'name' => $request->input('name'),

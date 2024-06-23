@@ -27,10 +27,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/club', [ClubController::class, 'index'])->name('club.index');
     Route::get('/club/{id}', [ClubController::class, 'show'])->name('club.show');
-    Route::get('/club/{id}/edit', [ClubController::class, 'edit'])->name('club.edit')
-        ->can('update', 'club');
-    Route::patch('/club/{id}/edit', [ClubController::class, 'update'])->name('club.update')
-        ->can('update', 'club');
+    Route::get('/club/{id}/edit', [ClubController::class, 'edit'])->name('club.edit');
+        // ->can('edit', 'club');
+    Route::patch('/club/{id}/edit', [ClubController::class, 'update'])->name('club.update');
+        // ->can('edit', 'club');
 
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
 });
