@@ -8,7 +8,7 @@ use App\Http\Requests\Club\EditClubRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Club;
 
-class ClubService
+class UserService
 {
     public function getUserClubs($paginate = 3)
     {
@@ -52,7 +52,7 @@ class ClubService
 
     public function updateClub(EditClubRequest $request, Club $club)
     {
-        // $this->authorizeEdit($club);
+        $this->authorizeEdit($club);
 
         $club->update([
             'name' => $request->input('name'),

@@ -7,15 +7,14 @@ use App\Http\Requests\Club\DeleteClubRequest;
 use App\Http\Requests\Club\EditClubRequest;
 use App\Models\Club;
 use App\Models\User;
-use App\Services\ClubService;
-use Exception;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class ClubController extends Controller
+class UserController extends Controller
 {
 
-    public function __construct(private ClubService $clubService) {}
+    public function __construct(private UserService $clubService) {}
 
     public function index()
     {
@@ -50,9 +49,8 @@ class ClubController extends Controller
         ]);
     }
 
-    public function edit($clubId)
+    public function edit(Club $club)
     {
-        $club = Club::where('id', $clubId)->firstOrFail();
         $this->clubService->authorizeEdit($club);
         $users = $this->clubService->getClubUsers($club, 10);
 
@@ -62,15 +60,12 @@ class ClubController extends Controller
         ]);
     }
 
-    public function update(EditClubRequest $request, $clubId)
+    public function update(EditClubRequest $request, Club $club)
     {
-        $club = Club::where('id', $clubId)->firstOrFail();
         $this->clubService->updateClub($request, $club);
-        $users = $this->clubService->getClubUsers($club, 10);
 
-        return Inertia::render("Club/Edit", [
+        return Inertia::render("Club/$club->id", [
             'club' => $club,
-            'users' => $users,
         ]);
     }
 
