@@ -27,7 +27,7 @@ class ClubController extends Controller
 
     public function create()
     {
-        return Inertia::render('Club/Create');
+        return Inertia::render("Club/Create");
     }
 
     public function show($id)
@@ -35,7 +35,7 @@ class ClubController extends Controller
         $club = Club::findOrFail($id);
         $users = $this->clubService->getClubUsers($club);
 
-        return Inertia::render('Club/Show', [
+        return Inertia::render("Club/Show", [
             'club' => $club,
             'users' => $users,
         ]);
@@ -44,9 +44,11 @@ class ClubController extends Controller
     public function store(CreateClubRequest $request)
     {
         $club = $this->clubService->createClub($request);
+        $users = $this->clubService->getClubUsers($club);
 
-        return Inertia::render("Club/$club->id", [
+        return Inertia::render("Club/Show", [
             'club' => $club,
+            'users' => $users,
         ]);
     }
 

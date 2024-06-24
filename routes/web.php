@@ -25,12 +25,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/club/create', [ClubController::class, 'create'])->name('club.create');
+    // ->can('edit', 'club');
+    Route::post('/club', [ClubController::class, 'store'])->name('club.store');
+
     Route::get('/club', [ClubController::class, 'index'])->name('club.index');
     Route::get('/club/{id}', [ClubController::class, 'show'])->name('club.show');
     Route::get('/club/{id}/edit', [ClubController::class, 'edit'])->name('club.edit');
         // ->can('edit', 'club');
+
     Route::patch('/club/{id}/edit', [ClubController::class, 'update'])->name('club.update');
-        // ->can('edit', 'club');
+    // ->can('edit', 'club');
 
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
 });
