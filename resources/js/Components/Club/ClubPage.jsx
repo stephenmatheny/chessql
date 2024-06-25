@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 
-export default function ClubPage({ club }) {
-    const coordinators = club.users.filter(user => user.pivot.role === 'admin');
+export default function ClubPage({ club, users }) {
+    const coordinators = users.data.filter(user => user.pivot.role === 'admin');
 
     return (
         <div className="max-w-full sm:max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
