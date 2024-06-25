@@ -76,14 +76,17 @@ class ClubController extends Controller
         ]);
     }
 
-    public function destroy(DeleteClubRequest $request, Club $club)
+    public function destroy(DeleteClubRequest $request, $id)
     {
-        $this->clubService->deleteClub($request, $club);
+        $club = Club::findOrFail($id);
+        $this->clubService->deleteClub($club);
 
-        $clubs = $this->clubService->getUserClubs();
+        // $clubs = $this->clubService->getUserClubs(6);
 
-        return Inertia::render('Club/Index', [
-            'clubs' => $clubs,
-        ]);
+        return redirect()->route('club.index')->with('success', 'Club deleted successfully');
+
+        // return Inertia::render('Club/Index', [
+        //     'clubs' => $clubs,
+        // ]);
     }
 }

@@ -95,7 +95,7 @@ export default function CreateChessClubInformationForm({ auth, className = '' })
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton disabled={processing}>Create</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -104,7 +104,7 @@ export default function CreateChessClubInformationForm({ auth, className = '' })
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-cyan-600 dark:text-cyan-400">Saved.</p>
+                        <p className="text-sm text-cyan-600 dark:text-cyan-400">Created.</p>
                     </Transition>
                 </div>
             </form>
