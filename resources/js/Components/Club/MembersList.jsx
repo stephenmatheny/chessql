@@ -1,14 +1,16 @@
 import PaginationLink from "../PaginationLink";
-import ClubCard from "./ClubCard";
+import MemberCard from "./MemberCard";
 
-export default function ClubList({ clubs }) {
+export default function MembersList({ users }) {
     return (
         <>
-            {clubs.data.map(club => {
-                return <ClubCard key={club.id} club={club} />
-            })}
+            <div className="grid grid-cols-3 gap-4 px-4">
+                {users.data.map(user => {
+                    return <MemberCard key={user.id} user={user} />
+                })}
+            </div>
             <div className="flex justify-center flex-wrap space-x-2 mt-4">
-                {clubs.links.map((link, index) => (
+                {users.links.map((link, index) => (
                     <PaginationLink
                         key={index}
                         href={link.url ? link.url : "#"}

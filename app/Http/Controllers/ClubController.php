@@ -25,6 +25,28 @@ class ClubController extends Controller
         ]);
     }
 
+    public function members($id)
+    {
+        $club = Club::with('users')->findOrFail($id);
+        $users = $club->users()->paginate(12);
+
+        return Inertia::render("Club/Members", [
+            'club' => $club,
+            'users' => $users,
+        ]);
+    }
+
+    public function events($id)
+    {
+        $club = Club::findOrFail($id);
+        $users = $this->clubService->getClubUsers($club);
+
+        return Inertia::render("Club/Show", [
+            'club' => $club,
+            'users' => $users,
+        ]);
+    }
+
     public function create()
     {
         return Inertia::render("Club/Create");
@@ -32,7 +54,7 @@ class ClubController extends Controller
 
     public function show($id)
     {
-        $club = Club::findOrFail($id);
+        $club = Club::with('users')->findOrFail($id);
         $users = $this->clubService->getClubUsers($club);
 
         return Inertia::render("Club/Show", [

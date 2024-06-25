@@ -23,7 +23,7 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
-    public function isClubAdmin($clubId): bool
+    public function isClubAdmin(int $clubId): bool
     {
         return $this->clubs()
             ->where('club_id', $clubId)

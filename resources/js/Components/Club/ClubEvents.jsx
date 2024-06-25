@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 
-export default function ClubPage({ club }) {
-    const coordinators = club.users.filter(user => user.pivot.role === 'admin');
+export default function ClubEvents({ club, users }) {
+    const coordinators = users.data.filter(user => user.pivot.role === 'admin');
 
     return (
         <div className="max-w-full sm:max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
@@ -33,6 +33,20 @@ export default function ClubPage({ club }) {
                             </div>
                         </div>
                     )}
+
+                    {/* Members Section (Optional, if needed in the future) */}
+                    <div>
+                        <h3 className="font-semibold text-lg mb-2">Members</h3>
+                        <div className="flex flex-wrap">
+                            {users.data.map((user, index) => (
+                                <div key={user.id} className="mr-4 mb-2">
+                                    <Link className="text-sm text-cyan-400 hover:duration-300 hover:text-cyan-600" href={route('user.show', { id: user.id })}>
+                                        {user.first_name} {user.last_name}
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

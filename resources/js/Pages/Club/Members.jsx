@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
-import { Head, Link, usePage } from '@inertiajs/react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import ClubPage from '@/Components/Club/ClubPage';
 import ClubHeader from '@/Components/Club/ClubHeader';
 import ClubNavigation from '@/Components/Club/ClubNavigation';
+import MembersList from '@/Components/Club/MembersList';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
-export default function Show({ auth, club }) {
+export default function Members({ auth, club, users }) {
     const coordinators = club.users.filter(user => user.pivot.role === 'admin');
     const isAdmin = auth.user && coordinators.some(coordinator => coordinator.id === auth.user.id);
-
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -19,8 +16,10 @@ export default function Show({ auth, club }) {
                 </>
             }
         >
-            <div className="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <ClubPage club={club} />
+            <div className="py-12">
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <MembersList users={users} />
+                </div>
             </div>
         </AuthenticatedLayout>
     );
