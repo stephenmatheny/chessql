@@ -7,7 +7,7 @@ export default function ClubList({ clubs }) {
             {clubs.data.map(club => {
                 return <ClubCard key={club.id} club={club} />
             })}
-            <div className="flex justify-center space-x-4 mt-4">
+            <div className="flex justify-center flex-wrap space-x-2 mt-4">
                 {clubs.links.map((link, index) => (
                     <PaginationLink
                         key={index}

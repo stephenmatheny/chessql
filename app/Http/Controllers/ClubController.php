@@ -28,11 +28,11 @@ class ClubController extends Controller
     public function members($id)
     {
         $club = Club::with('users')->findOrFail($id);
-        // $users = $this->clubService->getClubUsers($club);
+        $users = $club->users()->paginate(12);
 
-        return Inertia::render("Club/Show", [
+        return Inertia::render("Club/Members", [
             'club' => $club,
-            // 'users' => $users,
+            'users' => $users,
         ]);
     }
 
