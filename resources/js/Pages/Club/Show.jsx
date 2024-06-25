@@ -5,8 +5,8 @@ import ClubPage from '@/Components/Club/ClubPage';
 import ClubHeader from '@/Components/Club/ClubHeader';
 import ClubNavigation from '@/Components/Club/ClubNavigation';
 
-export default function Show({ auth, club }) {
-    const coordinators = club.users.filter(user => user.pivot.role === 'admin');
+export default function Show({ auth, club, users }) {
+    const coordinators = users.data.filter(user => user.pivot.role === 'admin');
     const isAdmin = auth.user && coordinators.some(coordinator => coordinator.id === auth.user.id);
 
     return (
@@ -20,7 +20,7 @@ export default function Show({ auth, club }) {
             }
         >
             <div className="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <ClubPage club={club} />
+                    <ClubPage club={club} users={users} />
             </div>
         </AuthenticatedLayout>
     );

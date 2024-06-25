@@ -2,30 +2,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import UpdateChessClubInformationForm from './Partials/UpdateChessClubInformationForm';
 import { useState } from 'react';
+import DeleteChessClub from './Partials/DeleteChessClub';
 
 export default function Edit({ auth, club, users }) {
-    const { delete: destroy, processing } = useForm();
-    const [isDeleting, setIsDeleting] = useState(false);
-
-    const handleDelete = (e) => {
-        e.preventDefault(); // Prevent default navigation behavior
-        const confirmation = prompt(`Type "delete" to confirm deletion of "${club.name}":`);
-        if (confirmation === 'delete') {
-            setIsDeleting(true);
-            destroy(route('club.destroy', club.id), {
-                onSuccess: () => {
-                    setIsDeleting(false);
-                },
-                onError: (errors) => {
-                    setIsDeleting(false);
-                    console.error(errors);
-                },
-            });
-        } else {
-            alert('Deletion cancelled.');
-        }
-    };
-
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -35,18 +14,6 @@ export default function Edit({ auth, club, users }) {
                         <h2 className="font-semibold text-xl text-cyan-800 dark:text-logoColor leading-tight">
                             Edit: {club.name}
                         </h2>
-                    </div>
-                    <div>
-                        <button
-                            onClick={handleDelete}
-                            disabled={processing}
-                            className="pr-2 mt-auto text-sm text-cyan-400 hover:duration-300 hover:text-cyan-600"
-                        >
-                            Delete
-                        </button>
-                        {isDeleting && (
-                            <span className="ml-2 text-sm text-cyan-600">Deleting...</span>
-                        )}
                     </div>
                 </div>
             }
@@ -62,6 +29,10 @@ export default function Edit({ auth, club, users }) {
                             users={users}
                             className="max-w-xl"
                         />
+                    </div>
+
+                    <div className="p-4 sm:p-8 bg-white dark:bg-cyan-800 shadow sm:rounded-lg">
+                        <DeleteChessClub className="max-w-xl" club={club} />
                     </div>
                 </div>
             </div>
