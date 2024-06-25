@@ -63,7 +63,7 @@ class ClubService
         ]);
     }
 
-    public function deleteClub(DeleteClubRequest $request, Club $club)
+    public function deleteClub(Club $club)
     {
         $this->authorizeEdit($club);
 
