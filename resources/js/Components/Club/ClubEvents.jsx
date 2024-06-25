@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 
-export default function ClubPage({ club, users }) {
+export default function ClubEvents({ club, users }) {
     const coordinators = users.data.filter(user => user.pivot.role === 'admin');
 
     return (

@@ -3,10 +3,14 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 
 export default function Authenticated({ user, header, children }) {
+    const { url } = usePage();
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+
+    // Function to determine if the current URL matches the club section
+    const isActiveClub = url.startsWith('/club');
 
     return (
         <div className="min-h-screen bg-cyan-100 dark:bg-cyan-900">
@@ -25,7 +29,7 @@ export default function Authenticated({ user, header, children }) {
                                     Dashboard
                                 </NavLink>
 
-                                <NavLink href={route('club.index')} active={route().current('club.index')}>
+                                <NavLink href={route('club.index')} active={isActiveClub}>
                                     Clubs
                                 </NavLink>
                             </div>
@@ -101,7 +105,7 @@ export default function Authenticated({ user, header, children }) {
                         </ResponsiveNavLink>
 
 
-                        <ResponsiveNavLink href={route('club.index')} active={route().current('club.index')}>
+                        <ResponsiveNavLink href={route('club.index')} active={isActiveClub}>
                             Clubs
                         </ResponsiveNavLink>
                     </div>

@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/club', [ClubController::class, 'index'])->name('club.index');
+
     Route::post('/club', [ClubController::class, 'store'])->name('club.store');
     Route::delete('/club', [ClubController::class, 'destroy'])->name('club.destroy');
 
@@ -35,6 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/club/{id}', [ClubController::class, 'update'])->name('club.update');
     Route::delete('/club/{id}', [ClubController::class, 'destroy'])->name('club.destroy');
 
+
+    Route::get('/club/{id}/members', [ClubController::class, 'members'])->name('club.members');
+    Route::get('/club/{id}/events', [ClubController::class, 'events'])->name('club.events');
     Route::get('/club/{id}/edit', [ClubController::class, 'edit'])->name('club.edit');
 
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
