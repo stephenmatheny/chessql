@@ -29,6 +29,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('user')->onDelete('cascade');
             $table->foreignId('game_id')->constrained('game')->onDelete('cascade');
+            $table->enum('game_type', ['bullet', 'blitz', 'rapid', 'classical']);
             $table->integer('rating_before');
             $table->integer('rating_after');
             $table->timestamps();
