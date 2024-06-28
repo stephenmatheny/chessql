@@ -2,11 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Games;
+use App\Models\Game;
+use App\Services\GameService;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
+    protected $gameService;
+
+    public function __construct(GameService $gameService)
+    {
+        $this->gameService = $gameService;
+    }
+
+    public function completeGame(Request $request, $gameId)
+    {
+        $result = $request->input('result'); // 'white_win', 'black_win', or 'draw'
+        $game = $this->gameService->completeGame($gameId, $result);
+
+        return response()->json(['message' => 'Game completed and ratings updated.']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -34,7 +49,7 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Games $games)
+    public function show(Game $game)
     {
         //
     }
@@ -42,7 +57,7 @@ class GameController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Games $games)
+    public function edit(Game $game)
     {
         //
     }
@@ -50,7 +65,7 @@ class GameController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Games $games)
+    public function update(Request $request, Game $game)
     {
         //
     }
@@ -58,7 +73,7 @@ class GameController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Games $games)
+    public function destroy(Game $game)
     {
         //
     }

@@ -4,17 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Game extends Model
 {
     use HasFactory;
 
-    /**
-     * The clubs that belong to the user.
-     */
-    public function users(): BelongsToMany
+    protected $table = 'games';
+
+    protected $fillable = [
+        'result',
+    ];
+
+    // Relationships
+    public function players()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'player_games')
+                    ->withPivot('color')
+                    ->withTimestamps();
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
     }
 }

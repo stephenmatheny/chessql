@@ -13,6 +13,16 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            $user->bullet_rating = 1200;
+            $user->blitz_rating = 1200;
+            $user->rapid_rating = 1200;
+            $user->classical_rating = 1200;
+        });
+    }
+
     /**
      * The clubs that belong to the user.
      */
@@ -25,13 +35,24 @@ class User extends Authenticatable
     }
 
     /**
-     * The clubs that belong to the user.
+     * The games that belong to the user.
      */
     public function games(): HasMany
     {
         return $this->hasMany(Game::class);
     }
 
+    /**
+     * Get the ratings associated with the user.
+     */
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    /**
+     * Check if the user is an admin of the specified club.
+     */
     public function isClubAdmin(int $clubId): bool
     {
         return $this->clubs()

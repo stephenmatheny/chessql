@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('phone');
             $table->string('email')->unique();
+            $table->integer('bullet_rating')->default(1200);
+            $table->integer('blitz_rating')->default(1200);
+            $table->integer('rapid_rating')->default(1200);
+            $table->integer('classical_rating')->default(1200);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

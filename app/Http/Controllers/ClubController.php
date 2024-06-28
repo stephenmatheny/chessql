@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Club\CreateClubRequest;
-use App\Http\Requests\Club\DeleteClubRequest;
 use App\Http\Requests\Club\EditClubRequest;
 use App\Models\Club;
-use App\Models\User;
 use App\Services\ClubService;
-use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ClubController extends Controller
 {
+    private ClubService $clubService;
 
-    public function __construct(private ClubService $clubService) {}
+    public function __construct(ClubService $clubService)
+    {
+        $this->clubService = $clubService;
+    }
 
     public function index()
     {
@@ -28,7 +30,7 @@ class ClubController extends Controller
     public function members($id)
     {
         $club = Club::with('users')->findOrFail($id);
-        $users = $club->users()->paginate(12);
+        $users = $this->clubService->getClubUsers($club, 12);
 
         return Inertia::render("Club/Members", [
             'club' => $club,
@@ -76,7 +78,7 @@ class ClubController extends Controller
 
     public function edit($clubId)
     {
-        $club = Club::where('id', $clubId)->firstOrFail();
+        $club = $this->getClubById($clubId);
         $this->clubService->authorizeEdit($club);
         $users = $this->clubService->getClubUsers($club, 10);
 
@@ -88,7 +90,7 @@ class ClubController extends Controller
 
     public function update(EditClubRequest $request, $clubId)
     {
-        $club = Club::where('id', $clubId)->firstOrFail();
+        $club = $this->getClubById($clubId);
         $this->clubService->updateClub($request, $club);
         $users = $this->clubService->getClubUsers($club, 10);
 
@@ -98,17 +100,16 @@ class ClubController extends Controller
         ]);
     }
 
-    public function destroy(DeleteClubRequest $request, $id)
+    public function destroy(Request $request, $id)
     {
         $club = Club::findOrFail($id);
         $this->clubService->deleteClub($club);
 
-        // $clubs = $this->clubService->getUserClubs(6);
-
         return redirect()->route('club.index')->with('success', 'Club deleted successfully');
+    }
 
-        // return Inertia::render('Club/Index', [
-        //     'clubs' => $clubs,
-        // ]);
+    private function getClubById($clubId)
+    {
+        return Club::with('users')->findOrFail($clubId);
     }
 }
