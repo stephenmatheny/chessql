@@ -24,7 +24,7 @@ class GameSeeder extends Seeder
     public function run()
     {
         // Example: Create 10 games and complete them
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $whitePlayer = User::where('id', 1)->first();
             $blackPlayer = User::where('id', '!=', $whitePlayer->id)->inRandomOrder()->first();
 
@@ -42,6 +42,9 @@ class GameSeeder extends Seeder
 
             // Complete the game and update ratings
             $this->gameService->completeGame($game->id, $game->result);
+
+            $whitePlayer->refresh();
+            $blackPlayer->refresh();
         }
     }
 
@@ -52,7 +55,11 @@ class GameSeeder extends Seeder
      */
     protected function getRandomResult()
     {
-        $results = ['white_win', 'black_win', 'draw'];
+        $results = [
+            'white_win',
+            'black_win',
+            'draw'
+        ];
         return $results[array_rand($results)];
     }
 
@@ -63,7 +70,12 @@ class GameSeeder extends Seeder
      */
     protected function getRandomGameType()
     {
-        $gameType = ['bullet', 'blitz', 'rapid', 'classical'];
+        $gameType = [
+            'bullet',
+            'blitz',
+            'rapid',
+            'classical'
+        ];
         return $gameType[array_rand($gameType)];
     }
 }

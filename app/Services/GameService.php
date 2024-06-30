@@ -3,13 +3,13 @@
 namespace App\Services;
 
 use App\Models\Game;
+use App\Models\User;
 use App\Models\Rating;
 
 class GameService
 {
     public function calculateNewRating($currentRating, $opponentRating, $result)
     {
-
         $kFactor = 32;
         $expectedScore = 1 / (1 + pow(10, ($opponentRating - $currentRating) / 400));
 
@@ -35,8 +35,9 @@ class GameService
         $blackPlayer = $game->players()->wherePivot('color', 'black')->first();
         $gameType = $game->game_type;
 
-        $whiteRatingBefore = $whitePlayer->ratings()->where('game_id', $gameId)->orderBy('created_at', 'desc')->first()->rating_after ?? 1200;
-        $blackRatingBefore = $blackPlayer->ratings()->where('game_id', $gameId)->orderBy('created_at', 'desc')->first()->rating_after ?? 1200;
+        // Calculate ratings before the game
+        $whiteRatingBefore = $whitePlayer->{$gameType . '_rating'};
+        $blackRatingBefore = $blackPlayer->{$gameType . '_rating'};
 
         // Calculate new ratings based on the result
         if ($result === 'white_win') {
@@ -52,22 +53,31 @@ class GameService
             $blackRatingAfter = $this->calculateNewRating($blackRatingBefore, $whiteRatingBefore, 'draw');
         }
 
+        // Update user ratings for the specific game type
+        $this->updateUserRating($whitePlayer, $gameType, $whiteRatingAfter);
+        $this->updateUserRating($blackPlayer, $gameType, $blackRatingAfter);
+
         // Create rating records
         Rating::create([
             'user_id' => $whitePlayer->id,
             'game_id' => $game->id,
             'rating_before' => $whiteRatingBefore,
-            'rating_after' => $whiteRatingAfter
+            'rating_after' => $whiteRatingAfter,
         ]);
 
         Rating::create([
             'user_id' => $blackPlayer->id,
             'game_id' => $game->id,
             'rating_before' => $blackRatingBefore,
-            'rating_after' => $blackRatingAfter
+            'rating_after' => $blackRatingAfter,
         ]);
 
         return $game;
     }
 
+    protected function updateUserRating($player, $gameType, $ratingAfter)
+    {
+        $player->{$gameType . '_rating'} = $ratingAfter;
+        $player->save();
+    }
 }
