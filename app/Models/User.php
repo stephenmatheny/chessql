@@ -5,12 +5,23 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            $user->bullet_rating = 1200;
+            $user->blitz_rating = 1200;
+            $user->rapid_rating = 1200;
+            $user->classical_rating = 1200;
+        });
+    }
 
     /**
      * The clubs that belong to the user.
@@ -23,6 +34,25 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    /**
+     * The games that belong to the user.
+     */
+    public function games(): HasMany
+    {
+        return $this->hasMany(Game::class);
+    }
+
+    /**
+     * Get the ratings associated with the user.
+     */
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    /**
+     * Check if the user is an admin of the specified club.
+     */
     public function isClubAdmin(int $clubId): bool
     {
         return $this->clubs()
