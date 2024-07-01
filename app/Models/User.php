@@ -35,11 +35,13 @@ class User extends Authenticatable
     }
 
     /**
-     * The games that belong to the user.
+     * The games that belong to the user through the pivot table.
      */
-    public function games(): HasMany
+    public function games(): BelongsToMany
     {
-        return $this->hasMany(Game::class);
+        return $this->belongsToMany(Game::class, 'player_games')
+            ->withPivot('color')
+            ->withTimestamps();
     }
 
     /**

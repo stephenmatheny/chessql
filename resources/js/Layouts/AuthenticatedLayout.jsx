@@ -11,6 +11,7 @@ export default function Authenticated({ user, header, children }) {
 
     // Function to determine if the current URL matches the club section
     const isActiveClub = url.startsWith('/club');
+    const isActiveGame = url.startsWith('/game');
 
     return (
         <div className="min-h-screen bg-cyan-100 dark:bg-cyan-900">
@@ -25,12 +26,16 @@ export default function Authenticated({ user, header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                {/* <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
-                                </NavLink>
+                                </NavLink> */}
 
                                 <NavLink href={route('club.index')} active={isActiveClub}>
                                     Clubs
+                                </NavLink>
+
+                                <NavLink href={route('game.index')} active={isActiveGame}>
+                                    Games
                                 </NavLink>
                             </div>
                         </div>
@@ -100,13 +105,17 @@ export default function Authenticated({ user, header, children }) {
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+                        {/* <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
-                        </ResponsiveNavLink>
-
+                        </ResponsiveNavLink> */}
 
                         <ResponsiveNavLink href={route('club.index')} active={isActiveClub}>
                             Clubs
+                        </ResponsiveNavLink>
+
+
+                        <ResponsiveNavLink href={route('game.index')} active={isActiveGame}>
+                            Games
                         </ResponsiveNavLink>
                     </div>
 

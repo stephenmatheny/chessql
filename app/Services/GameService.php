@@ -5,27 +5,14 @@ namespace App\Services;
 use App\Models\Game;
 use App\Models\User;
 use App\Models\Rating;
+use Illuminate\Support\Facades\Auth;
 
 class GameService
 {
-    public function calculateNewRating($currentRating, $opponentRating, $result)
+    public function getUserGames()
     {
-        $kFactor = 32;
-        $expectedScore = 1 / (1 + pow(10, ($opponentRating - $currentRating) / 400));
-
-        if ($result === 'win') {
-            $score = 1;
-        }
-        if ($result === 'loss') {
-            $score = 0;
-        }
-        if ($result === 'draw') {
-            $score = 0.5;
-        }
-
-        $newRating = $currentRating + $kFactor * ($score - $expectedScore);
-
-        return round($newRating);
+        $user = Auth::user();
+        return $user->games;
     }
 
     public function completeGame($gameId, $result)
@@ -72,12 +59,40 @@ class GameService
             'rating_after' => $blackRatingAfter,
         ]);
 
+        $this->updateGameStatus($game);
+
         return $game;
+    }
+
+    public function calculateNewRating($currentRating, $opponentRating, $result)
+    {
+        $kFactor = 32;
+        $expectedScore = 1 / (1 + pow(10, ($opponentRating - $currentRating) / 400));
+
+        if ($result === 'win') {
+            $score = 1;
+        }
+        if ($result === 'loss') {
+            $score = 0;
+        }
+        if ($result === 'draw') {
+            $score = 0.5;
+        }
+
+        $newRating = $currentRating + $kFactor * ($score - $expectedScore);
+
+        return round($newRating);
     }
 
     protected function updateUserRating($player, $gameType, $ratingAfter)
     {
         $player->{$gameType . '_rating'} = $ratingAfter;
         $player->save();
+    }
+
+    protected function updateGameStatus($game)
+    {
+        $game->game_status = 'complete';
+        $game->save();
     }
 }

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->enum('result', ['white_win', 'black_win', 'draw'])->notNull();
+            $table->enum('game_status', ['requested', 'accepted', 'declined', 'complete'])->default('requested');
+            $table->enum('result', ['white_win', 'black_win', 'draw', 'incomplete'])->notNull();
             $table->enum('game_type', ['bullet', 'blitz', 'rapid', 'classical'])->nullable();
             $table->timestamps();
         });

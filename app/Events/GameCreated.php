@@ -9,12 +9,12 @@ use Illuminate\Queue\SerializesModels;
 
 class GameCreated
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    // use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public Game $game;
+    // public Game $game;
 
-    public function __construct(Game $game)
-    {
-        $this->game = $game;
-    }
+    // public function __construct(Game $game)
+    // {
+    //     $this->game = $game;
+    // }
 }
