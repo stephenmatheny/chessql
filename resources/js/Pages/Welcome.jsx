@@ -22,10 +22,10 @@ export default function Welcome({ auth }) {
                         <nav className="flex space-x-4">
                             {auth.user ? (
                                 <Link
-                                    href={route('dashboard')}
+                                    href={route('club.index')}
                                     className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#72EEFF] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                 >
-                                    Dashboard
+                                    Clubs
                                 </Link>
                             ) : (
                                 <>

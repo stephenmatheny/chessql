@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use App\Services\GameService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class GameController extends Controller
 {
@@ -22,12 +23,44 @@ class GameController extends Controller
 
         return response()->json(['message' => 'Game completed and ratings updated.']);
     }
+
+    public function accept(Game $game)
+    {
+        $game->update(['game_status' => 'accepted']);
+        return redirect()->back();
+    }
+
+    public function cancel(Game $game)
+    {
+        $game->update(['game_status' => 'cancelled']);
+        return redirect()->back();
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $games = $this->gameService->getUserGames();
+
+        $requestedGames = $games->filter(function ($game) {
+            return $game->game_status === 'requested';
+        })->values()->all();
+
+        $completeGames = $games->filter(function ($game) {
+            return $game->game_status === 'complete';
+        })->values()->all();
+
+        $acceptedGames = $games->filter(function ($game) {
+            return $game->game_status === 'accepted';
+        })->values()->all();
+
+        return Inertia::render('Game/Index', [
+            'games' => $games,
+            'requestedGames' => $requestedGames,
+            'completeGames' => $completeGames,
+            'acceptedGames' => $acceptedGames,
+        ]);
     }
 
     /**

@@ -13,9 +13,9 @@ class Game extends Model
 
     protected $fillable = [
         'result',
+        'game_status',
     ];
 
-    // Relationships
     public function players()
     {
         return $this->belongsToMany(User::class, 'player_games')

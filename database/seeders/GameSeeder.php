@@ -24,28 +24,63 @@ class GameSeeder extends Seeder
     public function run()
     {
         // Example: Create 10 games and complete them
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $whitePlayer = User::where('id', 1)->first();
             $blackPlayer = User::where('id', '!=', $whitePlayer->id)->inRandomOrder()->first();
+            $gameStatus = $this->getRandomGameStatus();
 
-            // Example: Create game with white and black players
-            $game = Game::create([
-                'result' => $this->getRandomResult(),
-                'game_type' => $this->getRandomGameType()
-            ]);
+            if($gameStatus === 'declined' || $gameStatus === 'requested') {
+                $game = Game::create([
+                    'result' => 'incomplete',
+                    'game_type' => $this->getRandomGameType(),
+                    'game_status' => $gameStatus,
+                ]);
 
-            // Attach players to the game
-            $game->players()->attach([
-                $whitePlayer->id => ['color' => 'white'],
-                $blackPlayer->id => ['color' => 'black'],
-            ]);
+                // Attach players to the game
+                $game->players()->attach([
+                    $whitePlayer->id => ['color' => 'white'],
+                    $blackPlayer->id => ['color' => 'black'],
+                ]);
+            }
 
-            // Complete the game and update ratings
-            $this->gameService->completeGame($game->id, $game->result);
+            if($gameStatus === 'accepted') {
+                // Example: Create game with white and black players
+                $game = Game::create([
+                    'result' => $this->getRandomResult(),
+                    'game_type' => $this->getRandomGameType(),
+                    'game_status' => $gameStatus,
+                ]);
 
-            $whitePlayer->refresh();
-            $blackPlayer->refresh();
+                // Attach players to the game
+                $game->players()->attach([
+                    $whitePlayer->id => ['color' => 'white'],
+                    $blackPlayer->id => ['color' => 'black'],
+                ]);
+
+                // Complete the game and update ratings
+                if(rand(0,1) === 0) {
+                    $this->gameService->completeGame($game->id, $game->result);
+                }
+
+                $whitePlayer->refresh();
+                $blackPlayer->refresh();
+            }
         }
+    }
+
+    /**
+     * Helper method to get a random game result
+     *
+     * @return string
+     */
+    protected function getRandomGameStatus()
+    {
+        $gameStatus = [
+            'requested',
+            'accepted',
+            'declined',
+        ];
+        return $gameStatus[array_rand($gameStatus)];
     }
 
     /**

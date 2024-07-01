@@ -9,16 +9,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class UpdateRatings implements ShouldQueue
 {
-    protected $gameService;
+    // protected $gameService;
 
-    public function __construct(GameService $gameService)
-    {
-        $this->gameService = $gameService;
-    }
+    // public function __construct(GameService $gameService)
+    // {
+    //     $this->gameService = $gameService;
+    // }
 
-    public function handle(GameCreated $event)
-    {
-        $game = $event->game;
-        $this->gameService->completeGame($game->id, $game->result);
-    }
+    // public function handle(GameCreated $event)
+    // {
+    //     $game = $event->game;
+    //     $this->gameService->completeGame($game->id, $game->result);
+    // }
 }
