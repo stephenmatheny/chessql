@@ -1,5 +1,5 @@
+import PageHeader from "../Dynamic/PageHeader";
 import WebNavigation from "./WebNavigation";
-import WebPageHeader from "./WebPageHeader";
 
 const WebLayout = ({ user, children }) => {
     return (
@@ -7,9 +7,9 @@ const WebLayout = ({ user, children }) => {
             <WebNavigation />
 
             <div className="flex flex-col size-full">
-                <WebPageHeader user={user} />
+                <PageHeader user={user} />
 
-                <main>{children}</main>
+                <main className="flex-grow">{children}</main>
             </div>
 
 

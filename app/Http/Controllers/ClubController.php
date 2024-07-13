@@ -21,7 +21,7 @@ class ClubController extends Controller
 
     public function index()
     {
-        $clubs = $this->clubService->getUserClubs(6);
+        $clubs = $this->clubService->getUserClubs(5);
         return Inertia::render('Club/Index', [
             'clubs' => $clubs,
         ]);

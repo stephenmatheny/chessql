@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ClubPage from '@/Components/Club/ClubPage';
 import MainLayout from '@/Layouts/MainLayout';
+import { Head } from '@inertiajs/react';
 
 export default function Show({ auth, club, users }) {
     const coordinators = users.data.filter(user => user.pivot.role === 'admin');
@@ -10,7 +11,8 @@ export default function Show({ auth, club, users }) {
         <MainLayout
             user={auth.user}
         >
-            <div className="pt-4 px-12">
+            <Head title={club.name} />
+            <div className="pt-4 mx-12">
                 <ClubPage club={club} users={users} />
             </div>
         </MainLayout>

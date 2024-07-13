@@ -1,14 +1,13 @@
-import WebPageHeader from "../Web/WebPageHeader";
+import PageHeader from "../Dynamic/PageHeader";
 import MobileNavigation from "./MobileNavigation";
-import MobilePageHeader from "./MobilePageHeader";
 
 const MobileLayout = ({ user, children }) => {
  return (
-    <div className="sm:hidden flex justify-start min-h-screen bg-cyan-100 dark:bg-cyan-900">
-        <div className="flex flex-col size-full">
-            <MobilePageHeader user={user} />
+    <div className="sm:hidden flex justify-start min-h-screen size-full bg-cyan-100 dark:bg-cyan-900">
+        <div className="flex flex-col size-full min-h-screen">
+            <PageHeader user={user} />
 
-            <main>{children}</main>
+            <main className="flex-grow">{children}</main>
 
             <MobileNavigation />
         </div>

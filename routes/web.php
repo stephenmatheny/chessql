@@ -30,7 +30,6 @@ Route::middleware('auth')->group(function () {
     /** CLUB */
     Route::get('/club', [ClubController::class, 'index'])->name('club.index');
     Route::post('/club', [ClubController::class, 'store'])->name('club.store');
-    Route::delete('/club', [ClubController::class, 'destroy'])->name('club.destroy');
 
     Route::get('/club/create', [ClubController::class, 'create'])->name('club.create');
 

@@ -6,7 +6,7 @@ export default function ClubPage({ club, users }) {
 
     return (
         <div className="max-w-full">
-            <div className="mx-4 bg-white dark:bg-cyan-800 overflow-hidden shadow-sm rounded-lg">
+            <div className="bg-white dark:bg-cyan-800 overflow-hidden shadow-sm rounded-md">
                 <div className="p-4 sm:p-6 text-cyan-900 dark:text-cyan-100">
                     {/* Club Details Section */}
                     <div className="mb-4">
