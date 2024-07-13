@@ -5,8 +5,8 @@ export default function ClubPage({ club, users }) {
     const coordinators = users.data.filter(user => user.pivot.role === 'admin');
 
     return (
-        <div className="max-w-full sm:max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
-            <div className="mx-4 bg-white dark:bg-cyan-800 overflow-hidden shadow-sm rounded-lg">
+        <div className="max-w-full">
+            <div className="bg-white dark:bg-cyan-800 overflow-hidden shadow-sm rounded-md">
                 <div className="p-4 sm:p-6 text-cyan-900 dark:text-cyan-100">
                     {/* Club Details Section */}
                     <div className="mb-4">

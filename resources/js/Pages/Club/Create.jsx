@@ -1,12 +1,11 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 import CreateChessClubInformationForm from './Partials/CreateChessClubInformationForm';
 
 export default function Create({ auth }) {
     return (
-        <AuthenticatedLayout
+        <MainLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-cyan-800 dark:text-logoColor leading-tight">Create Club</h2>}
         >
             <Head title={`Create`} />
 
@@ -28,6 +27,6 @@ export default function Create({ auth }) {
                     </div> */}
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </MainLayout>
     );
 }

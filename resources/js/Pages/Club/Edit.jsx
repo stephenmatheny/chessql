@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import MainLayout from '@/Layouts/MainLayout';
 import { Head, useForm } from '@inertiajs/react';
 import UpdateChessClubInformationForm from './Partials/UpdateChessClubInformationForm';
 import { useState } from 'react';
@@ -6,17 +6,8 @@ import DeleteChessClub from './Partials/DeleteChessClub';
 
 export default function Edit({ auth, club, users }) {
     return (
-        <AuthenticatedLayout
+        <MainLayout
             user={auth.user}
-            header={
-                <div className="flex flex-row justify-between">
-                    <div>
-                        <h2 className="font-semibold text-xl text-cyan-800 dark:text-logoColor leading-tight">
-                            Edit: {club.name}
-                        </h2>
-                    </div>
-                </div>
-            }
         >
             <Head title={`Edit - ${club.name}`} />
 
@@ -36,6 +27,6 @@ export default function Edit({ auth, club, users }) {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </MainLayout>
     );
 }
