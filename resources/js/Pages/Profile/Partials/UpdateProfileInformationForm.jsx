@@ -4,6 +4,8 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
+import EmojiPicker from 'emoji-picker-react';
+import { useState } from 'react';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }) {
     const user = usePage().props.auth.user;
@@ -18,15 +20,29 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
     const submit = (e) => {
         e.preventDefault();
+        patch(route('profile.update'), {
+            onSuccess: () => {
+                setSelectedEmoji(data.emoji); // Update selectedEmoji state with the new emoji
+            },
+            data: {
+                ...data,
+                emoji: selectedEmoji, // Include selected emoji in the update request
+            },
+        });
+    };
 
-        patch(route('profile.update'));
+    const [selectedEmoji, setSelectedEmoji] = useState(user.emoji);
+    const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
+
+    const handleEmojiClick = (emojiData) => {
+        setSelectedEmoji(emojiData.emoji);
+        setIsEmojiPickerOpen(false); // Close the emoji picker modal after selection
     };
 
     return (
         <section className={className}>
             <header>
                 <h2 className="text-lg font-medium text-cyan-900 dark:text-cyan-100">Profile Information</h2>
-
                 <p className="mt-1 text-sm text-cyan-600 dark:text-cyan-400">
                     Update your account's profile information and email address.
                 </p>
@@ -34,7 +50,56 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
             <form onSubmit={submit} className="mt-6 space-y-6">
 
+                {/* Emoji Picker Modal TODO: complete this */}
+                {/* <Transition
+                    show={isEmojiPickerOpen}
+                    enter="transition ease-out duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="transition ease-in duration-200"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                >
+                    <div className="fixed z-10 inset-0 overflow-y-auto">
+                        <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                            <div className="fixed inset-0 transition-opacity">
+                                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                            </div>
+                            <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
+                            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                    <div className="sm:flex sm:items-start">
+                                        <div className="mt-3 text-center sm:mt-0 sm:text-left">
+                                            <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">Pick an Emoji</h3>
+                                            <EmojiPicker
+                                                onEmojiClick={handleEmojiClick}
+                                                defaultEmoji={selectedEmoji}
+                                                autoFocusSearch={true}
+                                                theme="dark"
+                                                emojiStyle="native"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                    <PrimaryButton onClick={() => setIsEmojiPickerOpen(false)}>Done</PrimaryButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Transition> */}
+
+                {/* Display selected emoji TODO: complete this */}
+                {/* <div
+                    className="cursor-pointer"
+                    onClick={() => setIsEmojiPickerOpen(true)}
+                >
+                    {selectedEmoji && (
+                        <span className='text-8xl'>{selectedEmoji}</span>
+                    )}
+                </div> */}
                 <div>
+
                     <InputLabel htmlFor="first_name" value="First Name" />
 
                     <TextInput
